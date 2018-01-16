@@ -90,7 +90,7 @@ span.label {
 
   <div id="newSource_html">
     <select id="newSource_list">
-      <option value="dotSource">Source ponctuelle</option>
+      <option value="dotSource" selected>Source ponctuelle</option>
       <option value="parallelSource">Source à l'infini</option>
       <option value="conicSource">Source conique</option>
       <option value="finiteConicSource">Source conique finie</option>
@@ -114,7 +114,7 @@ span.label {
     <div id="conicSource_html" hidden>3
     </div>
 
-    <div id="finiteSource_html" hidden>4
+    <div id="finiteConicSource_html" hidden>4
     </div>
 
     <button id="newSource_button" onclick='create_source()'>Confirmer</button><br>
@@ -152,6 +152,8 @@ span.label {
     document.getElementById(currentChoice + "_html").hidden = false;
   }
 
+  document.getElementById("newSource_list").onchange();
+
   // Gestion du choix de la source à éditer / créer
   var sources_list_last = 'newSource'; //Dernière choix sélectionné
   document.getElementById("sources_list").onchange = function() {
@@ -160,6 +162,8 @@ span.label {
     sources_list_last = currentChoice;
     document.getElementById(currentChoice + "_html").hidden = false;
   }
+
+  document.getElementById("sources_list").onchange();
 
   var lastSourceNumber = 0; //Numéro de la dernière source créée
   create_source = function() {
