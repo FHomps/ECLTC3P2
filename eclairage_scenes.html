@@ -55,7 +55,7 @@ input {
 }
 span.label {
   display: inline-block;
-  width: 4em;
+  width: 5em;
 }
 #controlbox {
   text-align: center;
@@ -66,7 +66,7 @@ span.label {
   border: 3px outset;
   padding-bottom: 10px;
 }
-#rin_value, #bin_value, #gin_value {
+#rin_value, #bin_value, #gin_value, #iin_value {
   color: lime;
   background-color: black;
   padding: 2px 0.5em;
@@ -104,6 +104,9 @@ span.label {
 
     <input type="range" id="bin" min="0" max="1" step="0.01">
     <span class="label">bleu</span><span id="bin_value"></span><br>
+    
+    <input type="range" id="iin" min="0" max="1" step="0.01">
+    <span class="label">intensité</span><span id="iin_value"></span><br>
 
     <div id="dotSource_html" hidden>1
     </div>
@@ -138,6 +141,7 @@ span.label {
     rin_value.innerHTML = rin.value = scene.sources[0].color.r.toFixed(2);
     gin_value.innerHTML = gin.value = scene.sources[0].color.g.toFixed(2);
     bin_value.innerHTML = bin.value = scene.sources[0].color.b.toFixed(2);
+    iin_value.innerHTML = iin.value;
 
     // petite coquetterie : modification de la couleur du titre
     banner.style.color = 'rgb('+rin.value*100+'%,'+gin.value*100+'%,'+bin.value*100+'%)';
@@ -275,5 +279,61 @@ span.label {
     r.onload = update_image;
     r.open("POST",localhost + "/service/scene/" + current_scene,true);
     r.send(body);
+  }
+  
+    
+  /*
+  ** Gestionnaires d'événement pour modification intensite
+  */
+  
+  var ihold ;
+    
+  iin.onchange = function() {
+     scene = scenes[current_scene].info;
+     
+     // recuperation de la valeur des quatre actionneurs
+     if (parseFloat(iin.value)=0) {
+         scene.sources[0].color.r = 0;
+        scene.sources[0].color.g = 0;
+        scene.sources[0].color.b = 0;
+     }
+      
+     if ( ihold < parseFloat(iin.value) ) {
+        scene.sources[0].color.r = parseFloat(rin.value)+parseFloat(iin.value)/3;
+        scene.sources[0].color.g = parseFloat(gin.value)+parseFloat(iin.value)/3;
+        scene.sources[0].color.b = parseFloat(bin.value)+parseFloat(iin.value)/3;
+        if ( parseFloat(rin.value)*(1+parseFloat(iin.value))/3 >1) {
+            scene.sources[0].color.r = 1
+        }
+        if ( parseFloat(gin.value)*(1+parseFloat(iin.value))/3 >1) {
+            scene.sources[0].color.g = 1
+        }
+        if ( parseFloat(bin.value)*(1+parseFloat(iin.value))/3 >1) {
+            scene.sources[0].color.b = 1
+        }
+   } else {
+        scene.sources[0].color.r = parseFloat(rin.value)-parseFloat(iin.value)/3;
+        scene.sources[0].color.g = parseFloat(gin.value)-parseFloat(iin.value)/3;
+        scene.sources[0].color.b = parseFloat(bin.value)-parseFloat(iin.value)/3;
+        if ( parseFloat(rin.value)*(1-parseFloat(iin.value)/3) < 0) {
+            scene.sources[0].color.r = 0
+        }
+        if ( parseFloat(gin.value)*(1-parseFloat(iin.value)/3) < 0) {
+            scene.sources[0].color.g = 0
+        }
+        if ( parseFloat(bin.value)*(1-parseFloat(iin.value)/3) < 0) {
+            scene.sources[0].color.b = 0
+        }
+   }
+    
+    ihold = parseFloat(iin.value);
+       
+    // requete de mise a jour de la scene
+    var body = JSON.stringify({operation: "update", serial:JSON.stringify(scene)});
+    var r = new XMLHttpRequest();
+    r.onload = update_image;
+    r.open("POST",localhost + "/service/scene/" + current_scene,true);
+    r.send(body);
+        
   }
 </script>
