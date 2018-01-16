@@ -48,7 +48,9 @@ img {
   height: 300px;
   background-color: #222;
 }
-input {
+div[class="parameter"] {
+}
+input[type="range"] {
   width:250px;
   position: relative;
   top: 5px;
@@ -69,7 +71,7 @@ span.label {
 #rin_value, #bin_value, #gin_value, #iin_value {
   color: lime;
   background-color: black;
-  padding: 2px 0.5em;
+  padding: 0.3em;
   border: 1px inset #aaa;
   font-size: 80%;
 }
@@ -96,6 +98,7 @@ span.label {
       <option value="finiteConicSource">Source conique finie</option>
     </select>
 
+    <div id="color" class="parameter">
     <input type="range" id="rin" min="0" max="1" step="0.01">
     <span class="label">rouge</span><span id="rin_value"></span><br>
 
@@ -104,9 +107,20 @@ span.label {
 
     <input type="range" id="bin" min="0" max="1" step="0.01">
     <span class="label">bleu</span><span id="bin_value"></span><br>
-    
+
     <input type="range" id="iin" min="0" max="1" step="0.01">
     <span class="label">intensité</span><span id="iin_value"></span><br>
+  </div>
+
+    <div id="position" class="parameter"><br>Position :
+    X <input type="text" id="posxin" size="3">
+    Y <input type="text" id="posyin" size="3">
+    Z <input type="text" id="poszin" size="3"><br></div>
+    <div id="direction" class="parameter"><br>Direction :
+    X <input type="text" id="dirxin" size="3">
+    Y <input type="text" id="diryin" size="3">
+    Z <input type="text" id="dirzin" size="3"><br></div>
+    <div id="halfAngle" class="parameter"><br>HalfAngle : <input type="text" id="hAin" size="3"><br></div>
 
     <div id="dotSource_html" hidden>1
     </div>
@@ -284,24 +298,24 @@ span.label {
     r.open("POST",localhost + "/service/scene/" + current_scene,true);
     r.send(body);
   }
-  
-    
+
+
   /*
   ** Gestionnaires d'événement pour modification intensite
   */
-  
+
   var ihold ;
-    
+
   iin.onchange = function() {
      scene = scenes[current_scene].info;
-     
+
      // recuperation de la valeur des quatre actionneurs
      if (parseFloat(iin.value)=0) {
          scene.sources[0].color.r = 0;
         scene.sources[0].color.g = 0;
         scene.sources[0].color.b = 0;
      }
-      
+
      if ( ihold < parseFloat(iin.value) ) {
         scene.sources[0].color.r = parseFloat(rin.value)+parseFloat(iin.value)/3;
         scene.sources[0].color.g = parseFloat(gin.value)+parseFloat(iin.value)/3;
@@ -329,15 +343,15 @@ span.label {
             scene.sources[0].color.b = 0
         }
    }
-    
+
     ihold = parseFloat(iin.value);
-       
+
     // requete de mise a jour de la scene
     var body = JSON.stringify({operation: "update", serial:JSON.stringify(scene)});
     var r = new XMLHttpRequest();
     r.onload = update_image;
     r.open("POST",localhost + "/service/scene/" + current_scene,true);
     r.send(body);
-        
+
   }
 </script>
