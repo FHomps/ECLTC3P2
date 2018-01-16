@@ -186,6 +186,86 @@ span.label {
   var lastSourceNumber = 0; //Numéro de la dernière source créée
   create_source = function() {
     var sourceType = newSource_list.value;
+    
+    // BEGIN NEW SOURCE BDD UPDATE
+    //Maj objet scenes
+    scene = scenes[current_scene].info;
+    var newSource = Object();
+    
+    var color = Object();
+    color._class_ = "rgb";
+    color.r = 0;
+    color.g = 0;
+    color.b = 0;
+    newSource.color = color;
+    
+    if (sourceType == "dotSource"){
+        newSource._class_ = "LightSource";
+        var position = Object();
+        position._class_ = "vec3";
+        position.x = 0;
+        position.y = 0;
+        position.z = 0;
+        newSource.position = position;
+    }
+    else if (sourceType == "parallelSource"){
+        newSource._class_ = "ParallelSource";
+        newSource.faraway = 0.99e39;
+        var direction = Object();
+        direction._class_ = "vec3";
+        direction.x = 0;
+        direction.y = 0;
+        direction.z = 0;
+        newSource.direction = direction;
+    }
+    else if (sourceType == "conicSource"){
+        newSource._class_ = "ConicSource";
+        var position = Object();
+        position._class_ = "vec3";
+        position.x = 0;
+        position.y = 0;
+        position.z = 0;
+        newSource.position = position;
+        var direction = Object();
+        direction._class_ = "vec3";
+        direction.x = 0;
+        direction.y = 0;
+        direction.z = 0;
+        newSource.direction = direction;
+        newSource.halfAngle = 45;
+        newSource.penumbraSize = 0;
+    }
+    else if (sourceType == "finiteConicSource"){
+        newSource._class_ = "FiniteConicSource";
+        var position = Object();
+        position._class_ = "vec3";
+        position.x = 0;
+        position.y = 0;
+        position.z = 0;
+        newSource.position = position;
+        var direction = Object();
+        direction._class_ = "vec3";
+        direction.x = 0;
+        direction.y = 0;
+        direction.z = 0;
+        newSource.direction = direction;
+        newSource.halfAngle = 45;
+        newSource.penumbraSize = 0;
+        newSource.halfLifeDistance = 0;
+    }
+    else {
+        newSource._class_ = "fuckit";
+    }
+    scene.sources.push(newSource);
+    
+    // requête de mise à jour de la scène
+    var body = JSON.stringify({operation: "update", serial:JSON.stringify(scene)});
+    var r = new XMLHttpRequest();
+    r.onload = update_image;
+    r.open("POST",localhost + "/service/scene/" + current_scene,true);
+    r.send(body);
+    // END NEW SOURCE BDD UPDATE
+    
     lastSourceNumber++;
     var num = lastSourceNumber.toString();
     var option = document.createElement("option");
@@ -200,6 +280,24 @@ span.label {
 
     if (sourceType == "dotSource") {
       option.text += " (ponctuelle)";
+      
+      //Bouton on/off
+      var btn = document.createElement("button");
+      sourceHtml.appendChild(btn);
+      btn.onchange = function() {
+        scene = scenes[current_scene].info;
+        var size = scene.sources.length
+        scene.sources[size - 1].color.r = 0;
+        scene.sources[size - 1].color.g = 0;
+        scene.sources[size - 1].color.b = 0;
+
+        // requête bouton on/off
+        var body = JSON.stringify({operation: "update", serial:JSON.stringify(scene)});
+        var r = new XMLHttpRequest();
+        r.onload = update_image;
+        r.open("POST",localhost + "/service/scene/" + current_scene,true);
+        r.send(body);
+      }
     }
     else if (sourceType == "conicSource") {
       option.text += " (conique)";
