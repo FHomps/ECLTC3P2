@@ -365,17 +365,31 @@ document.getElementById("sources_list").onchange = function() {
 	//MaJ forcée curseurs au chmt de source
 	
 	/* Semble ne pas marcher...
-	rin_value.innerHTML = rin.value = scene.sources[numSource].color.r.toFixed(2);
-        gin_value.innerHTML = gin.value = scene.sources[numSource].color.g.toFixed(2);
-        bin_value.innerHTML = bin.value = scene.sources[numSource].color.b.toFixed(2);
-        iin_value.innerHTML = iin.value = 1;
-        posxin_value.innerHTML = posxin.value = scene.sources[numSource].position.x.toFixed(2);
-        posyin_value.innerHTML = posyin.value = scene.sources[numSource].position.y.toFixed(2);
-        poszin_value.innerHTML = poszin.value = scene.sources[numSource].position.z.toFixed(2);
-        dirxin_value.innerHTML = dirxin.value = scene.sources[numSource].direction.x.toFixed(2);
-        diryin_value.innerHTML = diryin.value = scene.sources[numSource].direction.y.toFixed(2);
-        dirzin_value.innerHTML = dirzin.value = scene.sources[numSource].direction.z.toFixed(2);
-        hAin_value.innerHTML = hAin.value = scene.sources[numSource].halfAngle.toFixed(2);*/
+	if (currentChoice == "newSource") {
+		rin_value.innerHTML = rin.value = 1;
+		gin_value.innerHTML = gin.value = 1;
+		bin_value.innerHTML = bin.value = 1;
+		iin_value.innerHTML = iin.value = 1;
+		posxin_value.innerHTML = posxin.value = 0;
+		posyin_value.innerHTML = posyin.value = 0;
+		poszin_value.innerHTML = poszin.value = 0;
+		dirxin_value.innerHTML = dirxin.value = 0;
+		diryin_value.innerHTML = diryin.value = 0;
+		dirzin_value.innerHTML = dirzin.value = 0;
+		hAin_value.innerHTML = hAin.value = 0;
+	} else {
+		rin_value.innerHTML = rin.value = scene.sources[numSource].color.r.toFixed(2);
+		gin_value.innerHTML = gin.value = scene.sources[numSource].color.g.toFixed(2);
+		bin_value.innerHTML = bin.value = scene.sources[numSource].color.b.toFixed(2);
+		iin_value.innerHTML = iin.value = 1;
+		posxin_value.innerHTML = posxin.value = scene.sources[numSource].position.x.toFixed(2);
+		posyin_value.innerHTML = posyin.value = scene.sources[numSource].position.y.toFixed(2);
+		poszin_value.innerHTML = poszin.value = scene.sources[numSource].position.z.toFixed(2);
+		dirxin_value.innerHTML = dirxin.value = scene.sources[numSource].direction.x.toFixed(2);
+		diryin_value.innerHTML = diryin.value = scene.sources[numSource].direction.y.toFixed(2);
+		dirzin_value.innerHTML = dirzin.value = scene.sources[numSource].direction.z.toFixed(2);
+		hAin_value.innerHTML = hAin.value = scene.sources[numSource].halfAngle.toFixed(2);
+	}*/
 }
 //MaJ auto au démarrage
 document.getElementById("sources_list").onchange();
