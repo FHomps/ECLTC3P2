@@ -86,7 +86,7 @@
 <img id="image2">
 <div id = "controlbox">
   <select id="sources_list">
-    <option value="newSource">&ltNouvelle Source...&gt</option>
+    <option value="newSource">Nouvelle Source</option>
   </select>
   <br>
 
@@ -239,7 +239,7 @@ scene_list.onchange = function() {
 	document.getElementById("sources_list").innerHTML="";
 	var newOption = document.createElement("option");
     newOption.setAttribute("value", "newSource");
-    var newText = document.createTextNode("&ltNouvelle Source...&gt");
+    var newText = document.createTextNode("Nouvelle Source");
     newOption.appendChild(newText);
     document.getElementById("sources_list").appendChild(newOption);
     
@@ -362,18 +362,20 @@ document.getElementById("sources_list").onchange = function() {
 		document.getElementById("delete_source_button").hidden = true;
 	}
 	
-	//MaJ forcée curseurs
+	//MaJ forcée curseurs au chmt de source
+	
+	/* Semble ne pas marcher...
 	rin_value.innerHTML = rin.value = scene.sources[numSource].color.r.toFixed(2);
-    gin_value.innerHTML = gin.value = scene.sources[numSource].color.g.toFixed(2);
-    bin_value.innerHTML = bin.value = scene.sources[numSource].color.b.toFixed(2);
-    iin_value.innerHTML = iin.value = 1;
-    posxin_value.innerHTML = posxin.value = scene.sources[numSource].position.x.toFixed(2);
-    posyin_value.innerHTML = posyin.value = scene.sources[numSource].position.y.toFixed(2);
-    poszin_value.innerHTML = poszin.value = scene.sources[numSource].position.z.toFixed(2);
-    dirxin_value.innerHTML = dirxin.value = scene.sources[numSource].direction.x.toFixed(2);
-    diryin_value.innerHTML = diryin.value = scene.sources[numSource].direction.y.toFixed(2);
-    dirzin_value.innerHTML = dirzin.value = scene.sources[numSource].direction.z.toFixed(2);
-    hAin_value.innerHTML = hAin.value = scene.sources[numSource].halfAngle.toFixed(2);
+        gin_value.innerHTML = gin.value = scene.sources[numSource].color.g.toFixed(2);
+        bin_value.innerHTML = bin.value = scene.sources[numSource].color.b.toFixed(2);
+        iin_value.innerHTML = iin.value = 1;
+        posxin_value.innerHTML = posxin.value = scene.sources[numSource].position.x.toFixed(2);
+        posyin_value.innerHTML = posyin.value = scene.sources[numSource].position.y.toFixed(2);
+        poszin_value.innerHTML = poszin.value = scene.sources[numSource].position.z.toFixed(2);
+        dirxin_value.innerHTML = dirxin.value = scene.sources[numSource].direction.x.toFixed(2);
+        diryin_value.innerHTML = diryin.value = scene.sources[numSource].direction.y.toFixed(2);
+        dirzin_value.innerHTML = dirzin.value = scene.sources[numSource].direction.z.toFixed(2);
+        hAin_value.innerHTML = hAin.value = scene.sources[numSource].halfAngle.toFixed(2);*/
 }
 //MaJ auto au démarrage
 document.getElementById("sources_list").onchange();
