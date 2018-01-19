@@ -185,7 +185,7 @@ var update_image = function() {
         diryin.value = scene.sources[numSource].direction.y.toFixed(2);
         dirzin.value = scene.sources[numSource].direction.z.toFixed(2);
         hAin.value = scene.sources[numSource].halfAngle.toFixed(2);
-        hLDin.value = scene.sources[numSource].halfAngle.toFixed(2);
+        hLDin.value = scene.sources[numSource].halfLifeDistance.toFixed(2);
         pSin.value = scene.sources[numSource].penumbraSize.toFixed(2);
         // petite coquetterie : modification de la couleur du titre
         banner.style.color = 'rgb('+rin.value*100+'%,'+gin.value*100+'%,'+bin.value*100+'%)';
@@ -300,6 +300,7 @@ document.getElementById("sources_list").onchange = function() {
 	var currentChoice = this.value;
 	var numSource = parseInt(currentChoice.split("_")[1], 10);
 	var sourceClass = currentChoice.split("_")[0];
+
 	if (sourceClass == "LightSource") {
 		document.getElementById("newSource_list").hidden = true;
 		document.getElementById("color").hidden = false;
