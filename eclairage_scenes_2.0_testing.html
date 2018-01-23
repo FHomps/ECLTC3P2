@@ -1,81 +1,81 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<!-- <style> -->
-<!-- body { -->
-  <!-- background: linear-gradient(0deg, silver, black); -->
-  <!-- margin: 0; -->
-  <!-- padding: 0px; -->
-  <!-- min-height: calc(100vh); -->
-  <!-- font-family: Arial; -->
-  <!-- letter-spacing: 0.1em; -->
-<!-- } -->
-<!-- h1 { -->
-  <!-- text-align: center; -->
-  <!-- background: linear-gradient(90deg, -->
-    <!-- rgba(255,255,255,0), -->
-    <!-- rgba(255,255,255,0.6), -->
-    <!-- rgba(255,255,255,0) -->
-  <!-- ); -->
-  <!-- color: white; -->
-  <!-- font-weight: normal; -->
-  <!-- padding: 5px; -->
-  <!-- text-shadow: 1px 1px white; -->
-<!-- } -->
-<!-- h1::before { -->
-  <!-- display: block; -->
-  <!-- height: 3px; -->
-  <!-- background: linear-gradient(90deg, -->
-    <!-- rgba(255,255,255,0.4), -->
-    <!-- rgba(255,255,255,1.0), -->
-    <!-- rgba(255,255,255,0.4) -->
-  <!-- ); -->
-  <!-- content: ""; -->
-  <!-- position: relative; -->
-  <!-- top: -5px; -->
-<!-- } -->
-<!-- #scene_list { -->
-  <!-- position: absolute; -->
-  <!-- width: 200px; -->
-  <!-- left: calc(50vw - 100px); -->
-  <!-- margin-top: 10px; -->
-  <!-- border: 1px inset; -->
-<!-- } -->
-<!-- img { -->
-  <!-- margin: 0 auto; -->
-  <!-- border: 3px solid #444; -->
-  <!-- display: block; -->
-  <!-- width: 400px; -->
-  <!-- height: 300px; -->
-  <!-- background-color: #222; -->
-<!-- } -->
-<!-- div[class="parameter"] { -->
-<!-- } -->
-<!-- input[type="range"] { -->
-  <!-- width:250px; -->
-  <!-- position: relative; -->
-  <!-- top: 5px; -->
-<!-- } -->
-<!-- span.label { -->
-  <!-- display: inline-block; -->
-  <!-- width: 5em; -->
-<!-- } -->
-<!-- #controlbox { -->
-  <!-- text-align: center; -->
-  <!-- background: linear-gradient(to bottom, #888, silver, #888); -->
-  <!-- margin: auto; -->
-  <!-- display: block; -->
-  <!-- width: 400px; -->
-  <!-- border: 3px outset; -->
-  <!-- padding-bottom: 10px; -->
-<!-- } -->
-<!-- #rin_value, #bin_value, #gin_value, #iin_value { -->
-  <!-- color: lime; -->
-  <!-- background-color: black; -->
-  <!-- padding: 0.3em; -->
-  <!-- border: 1px inset #aaa; -->
-  <!-- font-size: 80%; -->
-<!-- } -->
-<!-- </style> -->
+ <style>
+ body {
+   background: linear-gradient(0deg, silver, black);
+   margin: 0;
+   padding: 0px;
+   min-height: calc(100vh);
+   font-family: Arial;
+   letter-spacing: 0.1em;
+ }
+ h1 {
+   text-align: center;
+   background: linear-gradient(90deg,
+     rgba(255,255,255,0),
+     rgba(255,255,255,0.6),
+     rgba(255,255,255,0)
+   );
+   color: white;
+   font-weight: normal;
+   padding: 5px;
+   text-shadow: 1px 1px white;
+ }
+ h1::before {
+   display: block;
+   height: 3px;
+   background: linear-gradient(90deg,
+     rgba(255,255,255,0.4),
+     rgba(255,255,255,1.0),
+     rgba(255,255,255,0.4)
+   );
+   content: "";
+   position: relative;
+   top: -5px;
+ }
+ #scene_list {
+   position: absolute;
+   width: 200px;
+   left: calc(50vw - 100px);
+   margin-top: 10px;
+   border: 1px inset;
+ }
+ img {
+   margin: 0 auto;
+   border: 3px solid #444;
+   display: block;
+   width: 400px;
+   height: 300px;
+   background-color: #222;
+ }
+ div[class="parameter"] {
+ }
+ input[type="range"] {
+   width:250px;
+   position: relative;
+   top: 5px;
+ }
+ span.label {
+   display: inline-block;
+   width: 5em;
+ }
+ #controlbox {
+   text-align: center;
+   background: linear-gradient(to bottom, #888, silver, #888);
+   margin: auto;
+   display: block;
+   width: 400px;
+   border: 3px outset;
+   padding-bottom: 10px;
+ }
+ #rin_value, #bin_value, #gin_value, #iin_value {
+   color: lime;
+   background-color: black;
+   padding: 0.3em;
+   border: 1px inset #aaa;
+   font-size: 80%;
+ }
+ </style>
 
 <title>&Eacute;clairage changeant</title>
 <h1 id="banner">&Eacute;clairage changeant</h1>
@@ -97,6 +97,8 @@
       <option value="ConicSource">Source conique</option>
       <option value="FiniteConicSource">Source conique finie</option>
     </select>
+
+    <!-- Boutons et sliders utiles à la création des sources, cachés dynamiquement -->
 
     <div id="color" class="parameter">
     <input type="range" id="rin" min="0" max="1" step="0.01">
@@ -120,19 +122,9 @@
     X <input type="text" id="dirxin" size="3">
     Y <input type="text" id="diryin" size="3">
     Z <input type="text" id="dirzin" size="3"><br></div>
-    <div id="halfAngle" class="parameter"><br>HalfAngle : <input type="text" id="hAin" size="3"><br></div>
-
-    <!--<div id="LightSource_html" hidden>You're setting a LightSource !
-    </div>
-
-    <div id="ParallelSource_html" hidden>You're setting a ParallelSource !
-    </div>
-
-    <div id="ConicSource_html" hidden>You're setting a ConicSource !
-    </div>
-
-    <div id="FiniteConicSource_html" hidden>You're setting a FiniteConicSource !
-    </div>-->
+    <div id="halfAngle" class="parameter"><br>HalfAngle<input type="text" id="hAin" size="3"><br></div>
+    <div id="halfLifeDistance" class="parameter"><br>HalfLife Distance<input type="text" id="hLDin" size="3"><br></div>
+    <div id="penumbraSize" class="parameter"><br>Penumbra Size<input type="text" id="pSin" size="3"><br></div>
 
     <button id="newSource_button">Confirmer</button><br>
     <button id="delete_source_button">Supprimer</button><br>
@@ -173,7 +165,7 @@ r.send();
 //Initialisations diverses//
 ////////////////////////////
 
-var lastSourceNumber = 0; //Nombre de sources !
+var lastSourceNumber = 0; //Nombre de sources
 
 var update_image = function() {
 	data = JSON.parse(this.responseText);
@@ -184,42 +176,27 @@ var update_image = function() {
 	var currentChoice = document.getElementById("sources_list").value;
 	if (currentChoice != "newSource") {
         var numSource = parseInt(currentChoice.split("_")[1], 10);
-        alert("!numSource :"+numSource+"  /  !currentChoice :"+currentChoice);
         rin_value.innerHTML = rin.value = scene.sources[numSource].color.r.toFixed(2);
         gin_value.innerHTML = gin.value = scene.sources[numSource].color.g.toFixed(2);
         bin_value.innerHTML = bin.value = scene.sources[numSource].color.b.toFixed(2);
         iin_value.innerHTML = iin.value = 1;
-        posxin_value.innerHTML = posxin.value = scene.sources[numSource].position.x.toFixed(2);
-        posyin_value.innerHTML = posyin.value = scene.sources[numSource].position.y.toFixed(2);
-        poszin_value.innerHTML = poszin.value = scene.sources[numSource].position.z.toFixed(2);
-        dirxin_value.innerHTML = dirxin.value = scene.sources[numSource].direction.x.toFixed(2);
-        diryin_value.innerHTML = diryin.value = scene.sources[numSource].direction.y.toFixed(2);
-        dirzin_value.innerHTML = dirzin.value = scene.sources[numSource].direction.z.toFixed(2);
-        hAin_value.innerHTML = hAin.value = scene.sources[numSource].halfAngle.toFixed(2);
+        posxin.value = scene.sources[numSource].position.x.toFixed(2);
+        posyin.value = scene.sources[numSource].position.y.toFixed(2);
+        poszin.value = scene.sources[numSource].position.z.toFixed(2);
+        dirxin.value = scene.sources[numSource].direction.x.toFixed(2);
+        diryin.value = scene.sources[numSource].direction.y.toFixed(2);
+        dirzin.value = scene.sources[numSource].direction.z.toFixed(2);
+        hAin.value = scene.sources[numSource].halfAngle.toFixed(2);
+        hLDin.value = scene.sources[numSource].halfAngle.toFixed(2);
+        pSin.value = scene.sources[numSource].penumbraSize.toFixed(2);
         // petite coquetterie : modification de la couleur du titre
         banner.style.color = 'rgb('+rin.value*100+'%,'+gin.value*100+'%,'+bin.value*100+'%)';
         banner.style.textShadow = '1px 1px rgb('+(1-rin.value)*100+'%,'+(1-gin.value)*100+'%,'+(1-bin.value*100)+'%)';
     }
-}
-
-var create_source = function() {
-    alert("Source (this whore) is being created");
-	lastSourceNumber++;
-	
-	var newOption = document.createElement("option");
-    newOption.setAttribute("value", scene.sources[lastSourceNumber]._class_+"_"+lastSourceNumber);
-    newOption.setAttribute("id", scene.sources[lastSourceNumber]._class_+"_"+lastSourceNumber);
-    var newText = document.createTextNode(scene.sources[lastSourceNumber]._class_+"_"+lastSourceNumber);
-    newOption.appendChild(newText);
-    document.getElementById("sources_list").appendChild(newOption);
-}
-
-var delete_source = function(sourceNumber, sourceClass) {
-    alert("Source (this whore) is being deleted");
-	document.getElementById("sources_list").removeChild(document.getElementById(sourceClass+"_"+sourceNumber));
-	//MaJ
-	sources_list_last = 'newSource';
-	sources_list.onchange();
+    else if (scene.sources.length == 0){
+      //Workaround pour bug du raytracer (source "par défaut" visible après délétion de toutes les autres)
+      image2.src = "client/images/black.png" ;
+    }
 }
 
 /////////////////////////
@@ -231,19 +208,19 @@ var delete_source = function(sourceNumber, sourceClass) {
 scene_list.onchange = function() {
 	current_scene = this.value;
 	change_scene();
-	
-	// RECOVERY BDD ON LOADING
-	//Noms des sources: classe_numero
-	
-	//Réinitialise le sources_list
+
+	//Lecture de la base de données au moment du chargement
+	//Formatage du nom des sources: classe_numero
+
+	//Recréation de l'option "nouvelle source"
 	document.getElementById("sources_list").innerHTML="";
 	var newOption = document.createElement("option");
-    newOption.setAttribute("value", "newSource");
-    var newText = document.createTextNode("Nouvelle Source");
-    newOption.appendChild(newText);
-    document.getElementById("sources_list").appendChild(newOption);
-    
-    //Crée les bonnes entrées dans le sources_list
+  newOption.setAttribute("value", "newSource");
+  var newText = document.createTextNode("Nouvelle Source");
+  newOption.appendChild(newText);
+  document.getElementById("sources_list").appendChild(newOption);
+
+  //Création du reste des options
 	scene = scenes[current_scene].info;
 	for (var i = 0; i < scene.sources.length; i++){
 		var newOption = document.createElement("option");
@@ -254,22 +231,26 @@ scene_list.onchange = function() {
 		document.getElementById("sources_list").appendChild(newOption);
 	}
 	lastSourceNumber = scene.sources.length -1;
+  document.getElementById("newSource_list").onchange();
  }
- change_scene = function () {
+
+//Gère la requête nécessaire au changement de scène
+change_scene = function () {
 	var r = new XMLHttpRequest();
 	r.onload = update_image;
 	r.open("GET",localhost + "/service/scene/" + current_scene,true);
 	r.send();
- }
- 
+}
+
 //////////////////////////
 //Evenements chmt source//
 //////////////////////////
 
-//Menu nouvelle source
 var newSource_list_last = 'dotSource'
+//Fonction de changement de type de source à ajouter
 document.getElementById("newSource_list").onchange = function() {
 	var currentChoice = this.value;
+  //Cache ou révèle dynamiquement les éléments nécessaires
 	if (currentChoice == "LightSource") {
 		document.getElementById("newSource_list").hidden = false;
 		document.getElementById("color").hidden = false;
@@ -278,6 +259,8 @@ document.getElementById("newSource_list").onchange = function() {
 		document.getElementById("halfAngle").hidden = true;
 		document.getElementById("newSource_button").hidden = false;
 		document.getElementById("delete_source_button").hidden = true;
+    document.getElementById("halfLifeDistance").hidden = true;
+    document.getElementById("penumbraSize").hidden = true;
 	}
 	else if (currentChoice == "ParallelSource") {
 		document.getElementById("newSource_list").hidden = false;
@@ -287,6 +270,8 @@ document.getElementById("newSource_list").onchange = function() {
 		document.getElementById("halfAngle").hidden = true;
 		document.getElementById("newSource_button").hidden = false;
 		document.getElementById("delete_source_button").hidden = true;
+    document.getElementById("halfLifeDistance").hidden = true;
+    document.getElementById("penumbraSize").hidden = true;
 	}
 	else if (currentChoice == "ConicSource") {
 		document.getElementById("newSource_list").hidden = false;
@@ -296,6 +281,8 @@ document.getElementById("newSource_list").onchange = function() {
 		document.getElementById("halfAngle").hidden = false;
 		document.getElementById("newSource_button").hidden = false;
 		document.getElementById("delete_source_button").hidden = true;
+    document.getElementById("halfLifeDistance").hidden = true;
+    document.getElementById("penumbraSize").hidden = false;
 	}
 	else if (currentChoice == "FiniteConicSource") {
 		document.getElementById("newSource_list").hidden = false;
@@ -305,13 +292,16 @@ document.getElementById("newSource_list").onchange = function() {
 		document.getElementById("halfAngle").hidden = false;
 		document.getElementById("newSource_button").hidden = false;
 		document.getElementById("delete_source_button").hidden = true;
+    document.getElementById("halfLifeDistance").hidden = false;
+    document.getElementById("penumbraSize").hidden = false;
 	}
 }
-//MaJ auto au démarrage
+
+//MaJ automatique au démarrage
 document.getElementById("newSource_list").onchange();
 
-//Menu modif source
-var sources_list_last = 'newSource'; //Dernière choix sélectionné
+var sources_list_last = 'newSource'; //Dernier choix sélectionné
+//Fonction de changement de la source modifiable sélectionnée
 document.getElementById("sources_list").onchange = function() {
 	var currentChoice = this.value;
 	var numSource = parseInt(currentChoice.split("_")[1], 10);
@@ -324,6 +314,8 @@ document.getElementById("sources_list").onchange = function() {
 		document.getElementById("halfAngle").hidden = true;
 		document.getElementById("newSource_button").hidden = true;
 		document.getElementById("delete_source_button").hidden = false;
+    document.getElementById("halfLifeDistance").hidden = true;
+    document.getElementById("penumbraSize").hidden = true;
 	}
 	else if (sourceClass == "ParallelSource") {
 		document.getElementById("newSource_list").hidden = true;
@@ -333,6 +325,8 @@ document.getElementById("sources_list").onchange = function() {
 		document.getElementById("halfAngle").hidden = true;
 		document.getElementById("newSource_button").hidden = true;
 		document.getElementById("delete_source_button").hidden = false;
+    document.getElementById("halfLifeDistance").hidden = true;
+    document.getElementById("penumbraSize").hidden = true;
 	}
 	else if (sourceClass == "ConicSource") {
 		document.getElementById("newSource_list").hidden = true;
@@ -342,6 +336,8 @@ document.getElementById("sources_list").onchange = function() {
 		document.getElementById("halfAngle").hidden = false;
 		document.getElementById("newSource_button").hidden = true;
 		document.getElementById("delete_source_button").hidden = false;
+    document.getElementById("halfLifeDistance").hidden = true;
+    document.getElementById("penumbraSize").hidden = false;
 	}
 	else if (sourceClass == "FiniteConicSource") {
 		document.getElementById("newSource_list").hidden = true;
@@ -351,47 +347,15 @@ document.getElementById("sources_list").onchange = function() {
 		document.getElementById("halfAngle").hidden = false;
 		document.getElementById("newSource_button").hidden = true;
 		document.getElementById("delete_source_button").hidden = false;
+    document.getElementById("halfLifeDistance").hidden = false;
+    document.getElementById("penumbraSize").hidden = false;
 	}
 	else {
-		document.getElementById("newSource_list").hidden = false;
-		document.getElementById("color").hidden = true;
-		document.getElementById("position").hidden = true;
-		document.getElementById("direction").hidden = true;
-		document.getElementById("halfAngle").hidden = true;
-		document.getElementById("newSource_button").hidden = false;
-		document.getElementById("delete_source_button").hidden = true;
-	}
-	
-	//MaJ forcée curseurs au chmt de source
-	
-	/* Semble ne pas marcher...
-	if (currentChoice == "newSource") {
-		rin_value.innerHTML = rin.value = 1;
-		gin_value.innerHTML = gin.value = 1;
-		bin_value.innerHTML = bin.value = 1;
-		iin_value.innerHTML = iin.value = 1;
-		posxin_value.innerHTML = posxin.value = 0;
-		posyin_value.innerHTML = posyin.value = 0;
-		poszin_value.innerHTML = poszin.value = 0;
-		dirxin_value.innerHTML = dirxin.value = 0;
-		diryin_value.innerHTML = diryin.value = 0;
-		dirzin_value.innerHTML = dirzin.value = 0;
-		hAin_value.innerHTML = hAin.value = 0;
-	} else {
-		rin_value.innerHTML = rin.value = scene.sources[numSource].color.r.toFixed(2);
-		gin_value.innerHTML = gin.value = scene.sources[numSource].color.g.toFixed(2);
-		bin_value.innerHTML = bin.value = scene.sources[numSource].color.b.toFixed(2);
-		iin_value.innerHTML = iin.value = 1;
-		posxin_value.innerHTML = posxin.value = scene.sources[numSource].position.x.toFixed(2);
-		posyin_value.innerHTML = posyin.value = scene.sources[numSource].position.y.toFixed(2);
-		poszin_value.innerHTML = poszin.value = scene.sources[numSource].position.z.toFixed(2);
-		dirxin_value.innerHTML = dirxin.value = scene.sources[numSource].direction.x.toFixed(2);
-		diryin_value.innerHTML = diryin.value = scene.sources[numSource].direction.y.toFixed(2);
-		dirzin_value.innerHTML = dirzin.value = scene.sources[numSource].direction.z.toFixed(2);
-		hAin_value.innerHTML = hAin.value = scene.sources[numSource].halfAngle.toFixed(2);
-	}*/
+    document.getElementById("newSource_list").onchange();
+  }
 }
-//MaJ auto au démarrage
+
+//MaJ automatique au démarrage
 document.getElementById("sources_list").onchange();
 
 /////////////////////////////////////
@@ -399,43 +363,43 @@ document.getElementById("sources_list").onchange();
 /////////////////////////////////////
 
 //Gestionnaire d'évènements pour appui sur bouton nouvelle source
-
 document.getElementById("newSource_button").onclick = function() {
-    alert("Veux tu créer une nouvelle source You Bitch ?");
     var sourceType = newSource_list.value;
 
 	//Maj objet scene
 	scene = scenes[current_scene].info;
 	var newSource = Object();
 
+  //Récupération des données depuis l'interface HTML
 	if (sourceType == "LightSource"){
 		newSource._class_ = "LightSource";
 		var position = Object();
 		position._class_ = "vec3";
-		position.x = 0;
-		position.y = 0;
-		position.z = 0;
+		position.x = parseFloat(posxin.value);
+    //Les ParseFloat permettent la gestion d'exception implicitement
+		position.y = parseFloat(posyin.value);
+		position.z = parseFloat(poszin.value);
 		newSource.position = position;
 		var color = Object();
-        color._class_ = "rgb";
-        color.r = 0;
-        color.g = 0;
-        color.b = 0;
+    color._class_ = "rgb";
+    color.r = parseFloat(rin.value);
+    color.g = parseFloat(gin.value);
+    color.b = parseFloat(bin.value);
 		newSource.color = color;
 	}
 	else if (sourceType == "ParallelSource"){
 		newSource._class_ = "ParallelSource";
 		var direction = Object();newSource_list
 		direction._class_ = "vec3";
-		direction.x = 0;
-		direction.y = 0;
-		direction.z = 0;
+		direction.x = parseFloat(dirxin.value);
+		direction.y = parseFloat(diryin.value);
+		direction.z = parseFloat(dirzin.value);
 		newSource.direction = direction;
 		var color = Object();
-        color._class_ = "rgb";
-        color.r = 0;
-        color.g = 0;
-        color.b = 0;
+    color._class_ = "rgb";
+    color.r = parseFloat(rin.value);
+    color.g = parseFloat(gin.value);
+    color.b = parseFloat(bin.value);
 		newSource.color = color;
 		newSource.faraway = 0.99e39;
 	}
@@ -443,52 +407,50 @@ document.getElementById("newSource_button").onclick = function() {
 		newSource._class_ = "ConicSource";
 		var position = Object();
 		position._class_ = "vec3";
-		position.x = 0;
-		position.y = 0;
-		position.z = 0;
+    position.x = parseFloat(posxin.value);
+		position.y = parseFloat(posyin.value);
+		position.z = parseFloat(poszin.value);
 		newSource.position = position;
 		var direction = Object();
 		direction._class_ = "vec3";
-		direction.x = 0;
-		direction.y = 0;
-		direction.z = 0;
+    direction.x = parseFloat(dirxin.value);
+		direction.y = parseFloat(diryin.value);
+		direction.z = parseFloat(dirzin.value);
 		newSource.direction = direction;
-		newSource.halfAngle = 45;
+		newSource.halfAngle = parseFloat(hAin.value);
 		var color = Object();
-        color._class_ = "rgb";
-        color.r = 0;
-        color.g = 0;
-        color.b = 0;
+    color._class_ = "rgb";
+    color.r = parseFloat(rin.value);
+    color.g = parseFloat(gin.value);
+    color.b = parseFloat(bin.value);
 		newSource.color = color;
-		newSource.penumbraSize = 0;
+		newSource.penumbraSize = parseFloat(pSin.value);
 	}
 	else if (sourceType == "FiniteConicSource"){
 		newSource._class_ = "FiniteConicSource";
 		var position = Object();
 		position._class_ = "vec3";
-		position.x = 0;
-		position.y = 0;
-		position.z = 0;
+    position.x = parseFloat(posxin.value);
+		position.y = parseFloat(posyin.value);
+		position.z = parseFloat(poszin.value);
 		newSource.position = position;
 		var direction = Object();
 		direction._class_ = "vec3";
-		direction.x = 0;
-		direction.y = 0;
-		direction.z = 0;
+    direction.x = parseFloat(dirxin.value);
+		direction.y = parseFloat(diryin.value);
+		direction.z = parseFloat(dirzin.value);
 		newSource.direction = direction;
-		newSource.halfAngle = 45;
+		newSource.halfAngle = parseFloat(hAin.value);
 		var color = Object();
-        color._class_ = "rgb";
-        color.r = 0;
-        color.g = 0;
-        color.b = 0;
+    color._class_ = "rgb";
+    color.r = parseFloat(rin.value);
+    color.g = parseFloat(gin.value);
+    color.b = parseFloat(bin.value);
 		newSource.color = color;
-		newSource.halfLifeDistance = 0;
-		newSource.penumbraSize = 0;
+		newSource.halfLifeDistance = parseFloat(hLDin.value);
+		newSource.penumbraSize = parseFloat(pSin.value);
 	}
-	else {
-		newSource._class_ = "fuckit";
-	}
+
 	scene.sources.push(newSource);
 
 	//MaJ DB
@@ -497,47 +459,45 @@ document.getElementById("newSource_button").onclick = function() {
 	r.onload = update_image;
 	r.open("POST",localhost + "/service/scene/" + current_scene,true);
 	r.send(body);
-	
-	//MaJ menus
-	create_source();
+
+  scene_list.onchange();
 }
 
 //Gestionnaire d'évènements pour appui sur bouton supprimer source
-
 document.getElementById("delete_source_button").onclick = function() {
-    alert("Veux tu supprimer une nouvelle source You Bitch ?");
-    
-    //MaJ obj scene
-    scene = scenes[current_scene].info;
-    var currentChoice = document.getElementById("sources_list").value;
-    var numSource = parseInt(currentChoice.split("_")[1], 10);
+  //MaJ obj scene
+  scene = scenes[current_scene].info;
+  var currentChoice = document.getElementById("sources_list").value;
+  var numSource = parseInt(currentChoice.split("_")[1], 10);
 	var sourceClass = currentChoice.split("_")[0];
-	
+
 	scene.sources.splice(numSource, 1);
-	
+
 	//MaJ DB
 	var body = JSON.stringify({operation: "update", serial:JSON.stringify(scene)});
 	var r = new XMLHttpRequest();
 	r.onload = update_image;
-	alert("Image has been updated !")
 	r.open("POST",localhost + "/service/scene/" + current_scene,true);
 	r.send(body);
-	
-	//MaJ menus
-	delete_source(numSource, sourceClass);
+
+  scene_list.onchange();
 }
 
 //Gestionnaires d'événement pour modification d'une composante de couleur
 
 rin.onchange = bin.onchange = gin.onchange = function() {
+  rin_value.innerHTML = rin.value;
+  bin_value.innerHTML = bin.value;
+  gin_value.innerHTML = gin.value;
 	var currentChoice = document.getElementById("sources_list").value;
 	if (currentChoice != "newSource") {
         var numSource = parseInt(currentChoice.split("_")[1], 10);
+        //Récupération des valeurs des curseurs, mises dans l'objet scene
         scene = scenes[current_scene].info;
         scene.sources[numSource].color.r = parseFloat(rin.value);
         scene.sources[numSource].color.g = parseFloat(gin.value);
         scene.sources[numSource].color.b = parseFloat(bin.value);
-        
+
         // requête de mise à jour de la scène
         var body = JSON.stringify({operation: "update", serial:JSON.stringify(scene)});
         var r = new XMLHttpRequest();
@@ -550,6 +510,7 @@ rin.onchange = bin.onchange = gin.onchange = function() {
 //Gestionnaires d'événement pour modification intensite
 
 iin.onchange = function() {
+  iin_value.innerHTML = iin.value;
 	var currentChoice = document.getElementById("sources_list").value;
 	if (currentChoice != "newSource") {
         var numSource = parseInt(currentChoice.split("_")[1], 10);
@@ -568,6 +529,8 @@ iin.onchange = function() {
 }
 
 posxin.onchange = posyin.onchange = poszin.onchange = function() {
+
+
 	var currentChoice = document.getElementById("sources_list").value;
 	if (currentChoice != "newSource") {
         var numSource = parseInt(currentChoice.split("_")[1], 10);
@@ -575,7 +538,7 @@ posxin.onchange = posyin.onchange = poszin.onchange = function() {
         scene.sources[numSource].position.x = parseFloat(posxin.value);
         scene.sources[numSource].position.y = parseFloat(posyin.value);
         scene.sources[numSource].position.z = parseFloat(poszin.value);
-        
+
         // requête de mise à jour de la scène
         var body = JSON.stringify({operation: "update", serial:JSON.stringify(scene)});
         var r = new XMLHttpRequest();
@@ -588,14 +551,12 @@ posxin.onchange = posyin.onchange = poszin.onchange = function() {
 dirxin.onchange = diryin.onchange = dirzin.onchange = function() {
 	var currentChoice = document.getElementById("sources_list").value;
 	if (currentChoice != "newSource") {
-        alert("Will you affect those shitheads?");
         var numSource = parseInt(currentChoice.split("_")[1], 10);
         scene = scenes[current_scene].info;
         scene.sources[numSource].direction.x = parseFloat(dirxin.value);
         scene.sources[numSource].direction.y = parseFloat(diryin.value);
         scene.sources[numSource].direction.z = parseFloat(dirzin.value);
-        alert("Diryin yang ! Oh la blague ! Je fatique ! x:"+dirxin.value+"y:"+diryin.value+"z:"+dirzin.value);
-        
+
         // requête de mise à jour de la scène
         var body = JSON.stringify({operation: "update", serial:JSON.stringify(scene)});
         var r = new XMLHttpRequest();
@@ -606,19 +567,63 @@ dirxin.onchange = diryin.onchange = dirzin.onchange = function() {
 }
 
 hAin.onchange = function() {
-    var currentChoice = document.getElementById("sources_list").value;
+  var currentChoice = document.getElementById("sources_list").value;
 	if (currentChoice != "newSource") {
         var numSource = parseInt(currentChoice.split("_")[1], 10);
         scene = scenes[current_scene].info;
         scene.sources[numSource].halfAngle = parseFloat(hAin.value);
-        
+
         // requête de mise à jour de la scène
         var body = JSON.stringify({operation: "update", serial:JSON.stringify(scene)});
         var r = new XMLHttpRequest();
         r.onload = update_image;
         r.open("POST",localhost + "/service/scene/" + current_scene,true);
         r.send(body);
-    }
+  }
 }
+
+hLDin.onchange = function() {
+  var currentChoice = document.getElementById("sources_list").value;
+	if (currentChoice != "newSource") {
+        var numSource = parseInt(currentChoice.split("_")[1], 10);
+        scene = scenes[current_scene].info;
+        scene.sources[numSource].halfLifeDistance = parseFloat(hLDin.value);
+
+        // requête de mise à jour de la scène
+        var body = JSON.stringify({operation: "update", serial:JSON.stringify(scene)});
+        var r = new XMLHttpRequest();
+        r.onload = update_image;
+        r.open("POST",localhost + "/service/scene/" + current_scene,true);
+        r.send(body);
+  }
+}
+
+pSin.onchange = function() {
+  var currentChoice = document.getElementById("sources_list").value;
+	if (currentChoice != "newSource") {
+        var numSource = parseInt(currentChoice.split("_")[1], 10);
+        scene = scenes[current_scene].info;
+        scene.sources[numSource].penumbraSize = parseFloat(pSin.value);
+
+        // requête de mise à jour de la scène
+        var body = JSON.stringify({operation: "update", serial:JSON.stringify(scene)});
+        var r = new XMLHttpRequest();
+        r.onload = update_image;
+        r.open("POST",localhost + "/service/scene/" + current_scene,true);
+        r.send(body);
+  }
+}
+
+//Workaround pour un bug
+sources_list.onfocus = function() {
+  if (sources_list.value == "newSource")
+  scene_list.onchange();
+}
+
+//Initialisation des curseurs au chargement de la page
+rin_value.innerHTML = rin.value = 0;
+gin_value.innerHTML = gin.value = 0;
+bin_value.innerHTML = bin.value = 0;
+iin_value.innerHTML = iin.value = 1;
 
 </script>
