@@ -98,6 +98,8 @@
       <option value="FiniteConicSource">Source conique finie</option>
     </select>
 
+    <!-- Boutons et sliders utiles à la création des sources, cachés dynamiquement -->
+
     <div id="color" class="parameter">
     <input type="range" id="rin" min="0" max="1" step="0.01">
     <span class="label">rouge</span><span id="rin_value"></span><br>
@@ -163,7 +165,7 @@ r.send();
 //Initialisations diverses//
 ////////////////////////////
 
-var lastSourceNumber = 0; //Nombre de sources !
+var lastSourceNumber = 0; //Nombre de sources
 
 var update_image = function() {
 	data = JSON.parse(this.responseText);
@@ -192,6 +194,7 @@ var update_image = function() {
         banner.style.textShadow = '1px 1px rgb('+(1-rin.value)*100+'%,'+(1-gin.value)*100+'%,'+(1-bin.value*100)+'%)';
     }
     else if (scene.sources.length == 0){
+      //Workaround pour bug du raytracer (source "par défaut" visible après délétion de toutes les autres)
       image2.src = "client/images/black.png" ;
     }
 }
@@ -206,18 +209,18 @@ scene_list.onchange = function() {
 	current_scene = this.value;
 	change_scene();
 
-	// RECOVERY BDD ON LOADING
-	//Noms des sources: classe_numero
+	//Lecture de la base de données au moment du chargement
+	//Formatage du nom des sources: classe_numero
 
-	//Réinitialise le sources_list
+	//Recréation de l'option "nouvelle source"
 	document.getElementById("sources_list").innerHTML="";
 	var newOption = document.createElement("option");
-    newOption.setAttribute("value", "newSource");
-    var newText = document.createTextNode("Nouvelle Source");
-    newOption.appendChild(newText);
-    document.getElementById("sources_list").appendChild(newOption);
+  newOption.setAttribute("value", "newSource");
+  var newText = document.createTextNode("Nouvelle Source");
+  newOption.appendChild(newText);
+  document.getElementById("sources_list").appendChild(newOption);
 
-    //Crée les bonnes entrées dans le sources_list
+  //Création du reste des options
 	scene = scenes[current_scene].info;
 	for (var i = 0; i < scene.sources.length; i++){
 		var newOption = document.createElement("option");
@@ -231,21 +234,23 @@ scene_list.onchange = function() {
   document.getElementById("newSource_list").onchange();
  }
 
- change_scene = function () {
+//Gère la requête nécessaire au changement de scène
+change_scene = function () {
 	var r = new XMLHttpRequest();
 	r.onload = update_image;
 	r.open("GET",localhost + "/service/scene/" + current_scene,true);
 	r.send();
- }
+}
 
 //////////////////////////
 //Evenements chmt source//
 //////////////////////////
 
-//Menu nouvelle source
 var newSource_list_last = 'dotSource'
+//Fonction de changement de type de source à ajouter
 document.getElementById("newSource_list").onchange = function() {
 	var currentChoice = this.value;
+  //Cache ou révèle dynamiquement les éléments nécessaires
 	if (currentChoice == "LightSource") {
 		document.getElementById("newSource_list").hidden = false;
 		document.getElementById("color").hidden = false;
@@ -291,16 +296,16 @@ document.getElementById("newSource_list").onchange = function() {
     document.getElementById("penumbraSize").hidden = false;
 	}
 }
-//MaJ auto au démarrage
+
+//MaJ automatique au démarrage
 document.getElementById("newSource_list").onchange();
 
-//Menu modif source
-var sources_list_last = 'newSource'; //Dernière choix sélectionné
+var sources_list_last = 'newSource'; //Dernier choix sélectionné
+//Fonction de changement de la source modifiable sélectionnée
 document.getElementById("sources_list").onchange = function() {
 	var currentChoice = this.value;
 	var numSource = parseInt(currentChoice.split("_")[1], 10);
 	var sourceClass = currentChoice.split("_")[0];
-
 	if (sourceClass == "LightSource") {
 		document.getElementById("newSource_list").hidden = true;
 		document.getElementById("color").hidden = false;
@@ -347,9 +352,10 @@ document.getElementById("sources_list").onchange = function() {
 	}
 	else {
     document.getElementById("newSource_list").onchange();
-	}
+  }
 }
-//MaJ auto au démarrage
+
+//MaJ automatique au démarrage
 document.getElementById("sources_list").onchange();
 
 /////////////////////////////////////
@@ -357,19 +363,20 @@ document.getElementById("sources_list").onchange();
 /////////////////////////////////////
 
 //Gestionnaire d'évènements pour appui sur bouton nouvelle source
-
 document.getElementById("newSource_button").onclick = function() {
-  var sourceType = newSource_list.value;
+    var sourceType = newSource_list.value;
 
 	//Maj objet scene
 	scene = scenes[current_scene].info;
 	var newSource = Object();
 
+  //Récupération des données depuis l'interface HTML
 	if (sourceType == "LightSource"){
 		newSource._class_ = "LightSource";
 		var position = Object();
 		position._class_ = "vec3";
 		position.x = parseFloat(posxin.value);
+    //Les ParseFloat permettent la gestion d'exception implicitement
 		position.y = parseFloat(posyin.value);
 		position.z = parseFloat(poszin.value);
 		newSource.position = position;
@@ -459,7 +466,6 @@ document.getElementById("newSource_button").onclick = function() {
 }
 
 //Gestionnaire d'évènements pour appui sur bouton supprimer source
-
 document.getElementById("delete_source_button").onclick = function() {
   //MaJ obj scene
   scene = scenes[current_scene].info;
@@ -488,6 +494,7 @@ rin.onchange = bin.onchange = gin.onchange = function() {
 	var currentChoice = document.getElementById("sources_list").value;
 	if (currentChoice != "newSource") {
         var numSource = parseInt(currentChoice.split("_")[1], 10);
+        //Récupération des valeurs des curseurs, mises dans l'objet scene
         scene = scenes[current_scene].info;
         scene.sources[numSource].color.r = parseFloat(rin.value);
         scene.sources[numSource].color.g = parseFloat(gin.value);
@@ -609,12 +616,13 @@ pSin.onchange = function() {
   }
 }
 
-
+//Workaround pour un bug
 sources_list.onfocus = function() {
   if (sources_list.value == "newSource")
-    scene_list.onchange();
+  scene_list.onchange();
 }
 
+//Initialisation des curseurs au chargement de la page
 rin_value.innerHTML = rin.value = 0;
 gin_value.innerHTML = gin.value = 0;
 bin_value.innerHTML = bin.value = 0;
